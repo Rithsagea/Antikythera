@@ -8,6 +8,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    // https://github.com/melix/jmh-gradle-plugin
+    id("me.champeau.jmh") version "0.7.1"
 }
 
 repositories {
@@ -30,6 +32,15 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+jmh {
+    timeUnit.set("ms")
+    fork.set(2)
+
+    timeOnIteration.set("5s")
+    warmupIterations.set(2)
+    iterations.set(3)
 }
 
 application {
