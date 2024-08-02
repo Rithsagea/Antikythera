@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class GameTest {
     @Test
     public void testGameEquality() {
-        Game game1 = new Game.Builder().build();
+        Game game1 = Game.builder().build();
         Game game2 = game1.clone();
 
         assertEquals(game1, game2);

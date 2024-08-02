@@ -1,85 +1,57 @@
 package moe.lita.antikythera.data;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Deque;
-import java.util.Objects;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+
+@Builder
+@EqualsAndHashCode
 public class Game {
     public static final int BOARD_HEIGHT = 23;
     public static final int BOARD_WIDTH = 10;
     public static final Location DEFAULT_LOCATION = new Location(4, BOARD_HEIGHT - 2, 0);
 
     public Board board;
+    public Location location;
+    @Builder.Default
     public boolean hasHold = true;
     public Tetromino activePiece;
     public Tetromino holdPiece;
-    public Location location;
 
     public Deque<Tetromino> queue;
     public Randomizer random;
-    public BiConsumer<Queue<Tetromino>, Randomizer> queueStrategy = QueueStrategy.SEVEN_BAG;
+    public static BiConsumer<Queue<Tetromino>, Randomizer> queueStrategy = QueueStrategy.SEVEN_BAG;
 
-    public static class Builder {
-        private Game game = new Game();
+    public Game(Board board, Location location, boolean hasHold, Tetromino activePiece, Tetromino holdPiece,
+            Deque<Tetromino> queue, Randomizer random) {
+        this.board = board;
+        this.location = location;
+        this.hasHold = hasHold;
+        this.activePiece = activePiece;
+        this.holdPiece = holdPiece;
+        this.queue = queue;
+        this.random = random;
 
-        public Builder board(Board board) {
-            game.board = board;
-            return this;
-        }
+        if (board == null) this.board = new Board(BOARD_WIDTH, BOARD_HEIGHT);
+        if (queue == null) this.queue = new LinkedList<>();
+        if (random == null) this.random = new Randomizer(1);
 
-        public Builder queue(Deque<Tetromino> queue) {
-            game.queue = queue;
-            return this;
-        }
-
-        public Builder random(Randomizer random) {
-            game.random = random;
-            return this;
-        }
-
-        public Builder activePiece(Tetromino activePiece) {
-            game.activePiece = activePiece;
-            return this;
-        }
-
-        public Builder holdPiece(Tetromino holdPiece) {
-            game.holdPiece = holdPiece;
-            return this;
-        }
-
-        public Builder hasHold(boolean hasHold) {
-            game.hasHold = hasHold;
-            return this;
-        }
-
-        public Builder location(Location location) {
-            game.location = location;
-            return this;
-        }
-
-        public Game build() {
-            if (game.board == null) game.board = new Board(BOARD_WIDTH, BOARD_HEIGHT);
-            if (game.queue == null) game.queue = new ArrayDeque<>();
-            if (game.random == null) game.random = new Randomizer(1);
-
-            while (game.queue.size() < 5)
-                game.queueStrategy.accept(game.queue, game.random);
-            if (game.activePiece == null) game.activePiece = game.queue.poll();
-            if (game.location == null) game.location = DEFAULT_LOCATION.clone();
-
-            return game;
-        }
+        while (this.queue.size() < 5)
+            queueStrategy.accept(this.queue, this.random);
+        if (activePiece == null) this.activePiece = this.queue.poll();
+        if (location == null) this.location = DEFAULT_LOCATION.clone();
     }
 
     public Game clone() {
-        return new Builder()
+        return builder()
                 .board(board.clone())
-                .queue(new ArrayDeque<Tetromino>(queue))
+                .queue(new LinkedList<Tetromino>(queue))
                 .random(random.clone())
                 .activePiece(activePiece)
                 .holdPiece(holdPiece)
@@ -87,27 +59,6 @@ public class Game {
                 .location(location.clone())
                 .build();
     }
-
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Game)) return false;
-        Game game = (Game) obj;
-
-        return game.board.equals(board)
-                && Arrays.equals(game.queue.toArray(), queue.toArray())
-                && game.random.equals(random)
-                && game.activePiece == activePiece
-                && game.holdPiece == holdPiece
-                && game.hasHold == hasHold
-                && game.location.equals(location);
-    }
-
-    public int hashCode() {
-        return Objects.hash(
-                board, Arrays.hashCode(queue.toArray()), random,
-                activePiece, holdPiece, hasHold, location);
-    }
-
-    private Game() {}
 
     public String toString() {
         String boardString = board.toString();

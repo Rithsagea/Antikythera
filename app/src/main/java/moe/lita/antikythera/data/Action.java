@@ -2,6 +2,9 @@ package moe.lita.antikythera.data;
 
 import com.google.common.base.Function;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public enum Action {
     TAP_LEFT(Game::tapLeft),
     DAS_LEFT(Game::dasLeft),
@@ -13,13 +16,5 @@ public enum Action {
     HARD_DROP(Game::hardDrop),
     HOLD(Game::hold);
 
-    private final Function<Game, Boolean> callback;
-
-    private Action(Function<Game, Boolean> callback) {
-        this.callback = callback;
-    }
-
-    public boolean apply(Game game) {
-        return callback.apply(game);
-    }
+    public final Function<Game, Boolean> callback;
 }

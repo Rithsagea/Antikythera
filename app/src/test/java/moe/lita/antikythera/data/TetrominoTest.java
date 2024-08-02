@@ -30,7 +30,7 @@ class TetrominoTest {
 
     @Test
     void zSpinTriple() {
-        Game game = new Game.Builder()
+        Game game = Game.builder()
                 .board(new Board(5, 5)
                         .set(3, 0, true)
                         .set(0, 3, true)
@@ -48,7 +48,7 @@ class TetrominoTest {
 
     @Test
     void tSpinTriple() {
-        Game game = new Game.Builder()
+        Game game = Game.builder()
                 .board(new Board(5, 5)
                         .set(1, 0, true)
                         .set(1, 2, true)
@@ -66,7 +66,7 @@ class TetrominoTest {
 
     @Test
     void iSpinTriple() {
-        Game game = new Game.Builder()
+        Game game = Game.builder()
                 .board(new Board(5, 5)
                         .set(0, 4, true)
                         .set(1, 2, true)

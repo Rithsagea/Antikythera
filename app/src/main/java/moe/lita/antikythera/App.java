@@ -7,7 +7,7 @@ import moe.lita.antikythera.data.Game;
 public class App {
 
     public static void main(String[] args) {
-        Game game = new Game.Builder().build();
+        Game game = Game.builder().build();
         final Scanner scanner = new Scanner(System.in);
 
         boolean running = true;

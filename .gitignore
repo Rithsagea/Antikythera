@@ -7,5 +7,6 @@ build
 # Ignore LSP Generated directories
 bin
 .settings
+.factorypath
 .classpath
 .project

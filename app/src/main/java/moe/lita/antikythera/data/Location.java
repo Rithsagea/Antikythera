@@ -1,7 +1,10 @@
 package moe.lita.antikythera.data;
 
-import java.util.Arrays;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@ToString
+@EqualsAndHashCode
 public class Location {
     public int x;
     public int y;
@@ -11,22 +14,6 @@ public class Location {
         this.x = x;
         this.y = y;
         this.rotation = Math.floorMod(rotation, 4);
-    }
-
-    public String toString() {
-        return String.format("(x=%d,y=%d,rot=%d)", x, y, rotation);
-    }
-
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Location))
-            return false;
-
-        Location location = (Location) obj;
-        return x == location.x && y == location.y && rotation == location.rotation;
-    }
-
-    public int hashCode() {
-        return Arrays.hashCode(new int[] { x, y, rotation });
     }
 
     public Location clone() {

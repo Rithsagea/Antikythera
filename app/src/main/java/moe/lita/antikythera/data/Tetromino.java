@@ -1,5 +1,8 @@
 package moe.lita.antikythera.data;
 
+import lombok.Getter;
+
+@Getter
 public enum Tetromino {
     I(KickTable.KICK_TABLE_I_PIECE, "-1,0|0,0|1,0|2,0"),
     J(KickTable.KICK_TABLE_DEFAULT, "-1,1|-1,0|0,0|1,0"),
@@ -29,13 +32,5 @@ public enum Tetromino {
                 data[x + 1][y][1] = -data[x][y][0];
             }
         }
-    }
-
-    public int[][][] getData() {
-        return data;
-    }
-
-    public int[][][] getKickTable() {
-        return kickTable;
     }
 }

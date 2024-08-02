@@ -2,6 +2,9 @@ package moe.lita.antikythera.data;
 
 import java.util.BitSet;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Board {
     /*
      * Bottom left corner is (0, 0)
@@ -73,15 +76,5 @@ public class Board {
     // pretty strange
     public Board clone() {
         return new Board(this);
-    }
-
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Board)) return false;
-        Board board = (Board) obj;
-        return board.width == width && board.height == height && board.data.equals(data);
-    }
-
-    public int hashCode() {
-        return data.hashCode();
     }
 }

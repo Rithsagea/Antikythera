@@ -56,7 +56,7 @@ public class Candidate {
 
     private static Candidate generateCandidate(Candidate candidate, Action action) {
         Game game = candidate.game.clone();
-        if (!action.apply(game)) return null;
+        if (!action.callback.apply(game)) return null;
 
         List<Action> actions = new ArrayList<>(candidate.actions);
         actions.add(action);

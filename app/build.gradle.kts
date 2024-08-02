@@ -10,6 +10,7 @@ plugins {
     application
     // https://github.com/melix/jmh-gradle-plugin
     id("me.champeau.jmh") version "0.7.1"
+    id("io.freefair.lombok") version "8.6"
 }
 
 repositories {

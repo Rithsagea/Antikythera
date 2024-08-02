@@ -2,7 +2,10 @@ package moe.lita.antikythera.data;
 
 import java.util.List;
 
+import lombok.EqualsAndHashCode;
+
 // from https://github.com/Poyo-SSB/tetrio-bot-docs/blob/master/Piece_RNG.md
+@EqualsAndHashCode
 public class Randomizer {
     private int seed;
 
@@ -33,15 +36,5 @@ public class Randomizer {
 
     public Randomizer clone() {
         return new Randomizer(this.seed);
-    }
-
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Randomizer)) return false;
-        Randomizer random = (Randomizer) obj;
-        return seed == random.seed;
-    }
-
-    public int hashCode() {
-        return seed;
     }
 }
