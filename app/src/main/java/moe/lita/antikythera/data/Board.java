@@ -64,7 +64,7 @@ public class Board {
         StringBuilder res = new StringBuilder();
         for (int y = height - 1; y >= 0; y--) {
             for (int x = 0; x < width; x++) {
-                res.append(get(x, y) ? "x" : ".");
+                res.append(get(x, y) ? "x" : " ");
             }
             res.append("\n");
         }
