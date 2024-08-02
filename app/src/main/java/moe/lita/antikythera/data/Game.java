@@ -151,7 +151,7 @@ public class Game {
     }
 
     public boolean rotate(int rotation) {
-        rotation = Math.floorMod(rotation, 4);
+        rotation = rotation & 3;
         int[][][] kickTable = activePiece.getKickTable();
         for (int i = 0; i < kickTable[0].length; i++) {
             int x = kickTable[location.rotation][i][0] - kickTable[rotation][i][0];

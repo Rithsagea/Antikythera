@@ -13,7 +13,7 @@ public class Location {
     public Location(int x, int y, int rotation) {
         this.x = x;
         this.y = y;
-        this.rotation = Math.floorMod(rotation, 4);
+        this.rotation = rotation & 3;
     }
 
     public Location clone() {

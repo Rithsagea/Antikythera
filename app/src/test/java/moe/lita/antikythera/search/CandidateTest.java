@@ -12,7 +12,9 @@ public class CandidateTest {
     public void testCandidateSearch() {
         var game = Game.builder().build();
         var candidates = Candidate.findCandidates(game);
-        game.hardDrop();
-        assertArrayEquals(candidates.get(game).toArray(), new Action[] { Action.HARD_DROP });
+
+        game.softDrop();
+        assertArrayEquals(candidates.get(game.location).toArray(),
+                new Action[] { Action.HARD_DROP });
     }
 }

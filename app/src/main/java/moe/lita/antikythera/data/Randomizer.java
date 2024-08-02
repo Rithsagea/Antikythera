@@ -10,7 +10,7 @@ public class Randomizer {
     private int seed;
 
     public Randomizer(int seed) {
-        this.seed = Math.floorMod(seed, Integer.MAX_VALUE);
+        this.seed = seed & Integer.MAX_VALUE;
     }
 
     public int getSeed() {
@@ -18,7 +18,7 @@ public class Randomizer {
     }
 
     public int next() {
-        return seed = Math.floorMod(16807 * seed, Integer.MAX_VALUE);
+        return seed = (16807 * seed) & Integer.MAX_VALUE;
     }
 
     public double nextFloat() {
